@@ -1,0 +1,26 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+html,
+body {
+  height: 100vh;
+}
+
+#test-swipe-1,
+#test-swipe-2,
+#test-swipe-3 {
+  height: 100% !important;
+}
+
+.tabs-content.carousel.carousel-slider {
+  height: 93% !important;
+}
+
+.tabs {
+  height: 7%;
+}
