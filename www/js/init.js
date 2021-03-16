@@ -1,5 +1,4 @@
 
-
 document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
@@ -25,12 +24,13 @@ function onDeviceReady() {
                     tabsInstance.select("details-tab");
                     const data = $(e.target).data("body");
                     console.log(data);
-                    $(".card-panel .name").text(data.name);
+                    $("#details-tab .name").text(data.name);
                     for (const tag of data.tags)
-                        $(".card-panel .tags").append(`<div class="chip">${tag.name}</div>`);
+                        $("#details-tab .tags").append(`<div class="chip">${tag.name}</div>`);
                 });
             });
         })
     })
 })(jQuery);
+
 }
