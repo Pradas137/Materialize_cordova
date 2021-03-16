@@ -16,7 +16,7 @@ function onDeviceReady() {
             }).done(function (res) {
                 $(".collection-body").html('');
                 for (const item of res.artists) {
-                    $(".collection-body").append(`<a href="#!" class="collection-item">${item['name']}</a>`);
+                    $(".collection-body").append(`<a href="#!" class="collection-item">${item['name']}<i class="material-icons">send</i></a>`);
                     $(".collection-body a").last().data("body", item);
                 }
                 $(".collection-item").on("click", (e) => {
