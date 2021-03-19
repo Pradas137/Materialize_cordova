@@ -41,3 +41,9 @@ body {
 .tabs {
   height: 7%;
 }
+
+#myTableId{
+   border: 1px solid black;
+   width: 100%;
+   border-collapse: collapse;
+}

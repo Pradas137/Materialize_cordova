@@ -29,18 +29,18 @@ function showResults(result) {
   var music = result["artists"];
   for (let index = 0; index < music.length; index++) {
     const element = music[index];
-    $('.collection:first-of-type').append('<li artistid="'+element["id"]+'" class="collection-item">'+element["name"]+'<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></li>');
+    $('.collection:first-of-type').append('<li id="'+element["id"]+'" class="collection-item">'+element["name"]+'<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></li>');
   }
 
   $('.secondary-content').click(function() {
-    father = $(this).parent();
-    Text = father.clone().children().remove().end().text();
+    data = $(this).parent();
+    text = data.clone().children().remove().end().text();
     var tabs = document.getElementById("tabs");
     var instancia = M.Tabs.getInstance(tabs);
     instancia.select("test-swipe-2");
     $.ajax({
       method: "GET",
-      url: "https://musicbrainz.org/ws/2/artist/"+father.attr("artistid"), // Artist ID on custom tag
+      url: "https://musicbrainz.org/ws/2/artist/"+data.attr("id"), // Artist ID on custom tag
       dataType: "json",
     }).done(function(msg){
         details(msg);
@@ -49,12 +49,15 @@ function showResults(result) {
     });
   });
 
-  function details(info) {
-    $('.details').empty();
-    $('<h1>'+info["name"]+'</h3>').appendTo('.details');
-    $('<h2><b>Type:</b> '+info["type"]+'</h2>').appendTo('.details');
-    $('<h2><b>Country:</b> '+info["area"]["sort-name"]+'</h2>').appendTo('.details');
-    $('<h2><b>Life-span:</b> '+info["life-span"]["begin"]+' to '+info["life-span"]["end"]+'</h2>').appendTo('.details');
+  function details(informacion) {
+    $('#myTableId tbody').empty();
+    $('<td>'+informacion["name"]+'</td>').appendTo('#myTableId tbody');
+    $('<td>'+informacion["type"]+'</td>').appendTo('#myTableId tbody');
+    $('<td>'+informacion["area"]+'</td>').appendTo('#myTableId tbody');
+    $('<td>'+informacion["collection"]+'</td>').appendTo('#myTableId tbody');
+    $('<td>'+informacion["recording"]+'</td>').appendTo('#myTableId tbody');
+    $('<td>'+informacion["release"]+'</td>').appendTo('#myTableId tbody');
+    $('<td>'+informacion["release-group"]+'</td>').appendTo('#myTableId tbody');
   }
 }
 }
