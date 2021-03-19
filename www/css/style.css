@@ -8,17 +8,34 @@
 
 html,
 body {
-  height: 100vh;
+  height: 100%;
 }
 
-#test-swipe-1,
-#test-swipe-2,
+
 #test-swipe-3 {
   height: 100% !important;
+  background-color: blue !important;
 }
 
+#test-swipe-1{
+  height: 100% !important;
+  background-color: black !important;
+  color: white;
+}
+#test-swipe-2{
+  height: 100% !important;
+  background-color: green !important;
+}
 .tabs-content.carousel.carousel-slider {
   height: 93% !important;
+}
+
+#searchbar{
+	color: white !important;
+}
+
+.collection-item{
+	color: black !important;
 }
 
 .tabs {

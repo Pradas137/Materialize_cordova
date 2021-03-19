@@ -1,42 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta http-equiv="Content-Security-Policy" content="default-src https://code.jquery.com https://fonts.gstatic.com 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src https://fonts.googleapis.com 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="msapplication-tap-highlight" content="no">
-    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' https://covid-19-data.p.rapidapi.com http://musicbrainz.org https://code.jquery.com https://fonts.gstatic.com data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
   <title>Starter Template - Materialize</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 </head>
+
 <body>
-    <ul id="tabs-swipe-demo" class="tabs">
-    <li class="tab col s3"><a href="#test-swipe-1">Search</a></li>
-    <li class="tab col s3"><a class="active" href="#test-swipe-2">Test 2</a></li>
-    <li class="tab col s3"><a href="#test-swipe-3">Test 3</a></li>
+  <nav role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="sidenav">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+  <ul id="tabs" class="tabs">
+    <li class="tab col s3">
+      <a class="active" href="#search-tab">
+        <i class="material-icons">search</i>
+      </a>
+
+    </li>
+    <li class="tab col s3">
+      <a href="#details-tab">
+        <i class="material-icons">folder</i>
+      </a>
+    </li>
+
+    <li class="tab col s3">
+      <a href="#test-swipe-3">
+        <i class="material-icons">table</i>
+      </a>
+    </li>
   </ul>
-  <div id="test-swipe-1" class="col s12">
-      <div class="row">
-        <div class="input-field col s12">
-          <i class="material-icons prefix">search</i>
-          <input type="text" id="autocomplete-input" class="autocomplete">
-          <label for="autocomplete-input">Autocomplete</label>
+
+  <div id="search-tab" class="col s12" style="overflow: auto;">
+    <ul class="collection">
+      <li class="collection-header">
+        <div class="row">
+          <div class="input-field col s8">
+            <i class="material-icons prefix">search</i>
+            <input id="name" type="text" value="queen">
+            <label for="name">Name</label>
+          </div>
+          <div class="col s4">
+            <a class="waves-effect waves-light btn" href="#search-result" id="submit">Search</a>
+          </div>
+        </div>
+      </li>
+      <div class="collection-body">
+      </div>
+    </ul>
+  </div>
+  <div id="details-tab" class="col s12">
+    <div class="row">
+      <div class="col s12">
+        <p class="container id title"></p>
+      </div>
+      <div class="col s12">
+        <div class="container row">
+          <div class="col s6">
+            <p class="title"><span>Name:</span></p>
+            <p class="name"></p>
+          </div>
         </div>
       </div>
+    </div>
   </div>
-  <div id="test-swipe-2" class="col s12 red">Test 2</div>
-  <div id="test-swipe-3" class="col s12 green">Test 3</div>
+  <!--  Scripts-->
+  <script src="cordova.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
 
-  <!--  Scripts  -->
-    <script src="cordova.js"></script>
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="js/materialize.js"></script>
-    <script src="js/init.js"></script>
+</body>
 
-  </body>
 </html>

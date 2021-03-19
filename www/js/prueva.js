@@ -1,44 +1,36 @@
-// Arxiu init.js + index.js
- 
-(function($){
-  $(function(){
- 
-    $('.sidenav').sidenav();
-    $('.tabs').tabs({"swipeable": true, "responsiveThreshold": Infinity});
- 
-  }); // end of document ready
-})(jQuery); // end of jQuery name space
- 
- 
+
 document.addEventListener('deviceready', onDeviceReady, false);
- 
+
 function onDeviceReady() {
-    // Cordova is now initialized. Have fun!
- 
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
-    //document.getElementById('deviceready').classList.add('ready');
-}
+    $('.tabs').tabs({
+        "swipeable": true
+    });
 
-function cargarMusica(){
-    $.ajax({
-        type: 'GET',
-        url: 'https://musicbrainz.org/doc/MusicBrainz_API',
-        success: function(res){
-            let select = $('select')
-            select.html('')
-            let obj = res
-
-            obj.regiones.forEach((elemento, indice) => {
-                select.append(`
-                    <option value="${indice}">${elemento.nombre}</option>
-                `)
-
+    (function () {
+    $(function () {
+        $('.sidenav').sidenav();
+        $("#submit").on("click", () => {
+            $.ajax({
+                url: `http://musicbrainz.org/ws/2/artist/?query=${$("#name").val()}&fmt=json`
+            }).done(function (res) {
+                $(".collection-body").html('');
+                for (const item of res.artists) {
+                    $(".collection-body").append(`<a href="#!" class="collection-item">${item['name']}<i class="material-icons">send</i></a>`);
+                    $(".collection-body a").last().data("body", item);
+                }
+                $(".collection-item").on("click", (e) => {
+                    var tabsInstance = M.Tabs.getInstance($("#tabs"));
+                    tabsInstance.select("details-tab");
+                    const data = $(e.target).data("body");
+                    console.log(data);
+                    $("#details-tab .name").text(data.name);
+                    for (const tag of data.tags)
+                        $("#details-tab .tags").append(`<div class="chip">${tag.name}</div>`);
+                });
             });
-            $('select').trigger('change');
-        },
-        error: function(res){
-            let error = res.responseJSON.mensaje
-            console.log(error)
-        }
+        })
     })
-} 
+})(jQuery);
+
+}

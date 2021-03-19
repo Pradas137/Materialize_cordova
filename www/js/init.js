@@ -1,36 +1,53 @@
+(function($){
+  $(function(){
+    $('.sidenav').sidenav();
+    $('.tabs').tabs({ "swipeable": true });
+  });
+})(jQuery);
 
+$("#searchbutton").click(function() {
+  song = $('#searchbar').val();
+  $.ajax({
+    method: "GET",
+    url: "https://musicbrainz.org/ws/2/artist?query="+song,
+    dataType: "json",
+  }).done(function(msg){
+    showResults(msg);
+  }).fail(function(){
+    alert("Error");
+  });
+});
+
+function showResults(result) {
+  $('.collection:first-of-type').empty();
+  var music = result["artists"];
+  for (let index = 0; index < music.length; index++) {
+    const element = music[index];
+    $('.collection:first-of-type').append('<li artistid="'+element["id"]+'" class="collection-item">'+element["name"]+'<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></li>');
+  }
+
+  $('.secondary-content').click(function() {
+    varParent = $(this).parent();
+    parentText = varParent.clone().children().remove().end().text();
+    var tabs = document.getElementById("tabs");
+    var tabsInstance = M.Tabs.getInstance(tabs);
+    tabsInstance.select("test-swipe-2");
+    $.ajax({
+      method: "GET",
+      url: "https://musicbrainz.org/ws/2/artist/"+varParent.attr("artistid"), // Artist ID on custom tag
+      dataType: "json",
+    }).done(function(msg){
+      showDetails(msg);
+    }).fail(function(){
+      alert("Ajax Error");
+    });
+  });
+}
 document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
-    console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
-    $('.tabs').tabs({
-        "swipeable": true
-    });
+    // Cordova is now initialized. Have fun!
 
-    (function () {
-    $(function () {
-        $('.sidenav').sidenav();
-        $("#submit").on("click", () => {
-            $.ajax({
-                url: `http://musicbrainz.org/ws/2/artist/?query=${$("#name").val()}&fmt=json`
-            }).done(function (res) {
-                $(".collection-body").html('');
-                for (const item of res.artists) {
-                    $(".collection-body").append(`<a href="#!" class="collection-item">${item['name']}<i class="material-icons">send</i></a>`);
-                    $(".collection-body a").last().data("body", item);
-                }
-                $(".collection-item").on("click", (e) => {
-                    var tabsInstance = M.Tabs.getInstance($("#tabs"));
-                    tabsInstance.select("details-tab");
-                    const data = $(e.target).data("body");
-                    console.log(data);
-                    $("#details-tab .name").text(data.name);
-                    for (const tag of data.tags)
-                        $("#details-tab .tags").append(`<div class="chip">${tag.name}</div>`);
-                });
-            });
-        })
-    })
-})(jQuery);
+    console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
 
 }
