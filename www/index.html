@@ -4,13 +4,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>MaterializeCSS</title>
 
-        <!--cordova-->
         <meta http-equiv="Content-Security-Policy" content="default-src 'self'  https://fonts.gstatic.com https://code.jquery.com https://musicbrainz.org/ws/ data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
             
-        <!-- CSS  -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -29,7 +27,6 @@
                 </div>
             </nav>
         
-            <!-- Secciones -->
             <ul id="tabs" class="tabs">
               <li class="tab col s3">
                 <a class="active" href="#test-swipe-1">
@@ -48,17 +45,18 @@
               </li>
             </ul>
 
-            <!-- Buscar -->
             <div id="test-swipe-1" class="col s12 blue">
                 <input type="text" id="searchbar" placeholder="artist name here" value="queen">
                 <button id="searchbutton" class="btn waves-effect waves-light">Search</button>
                 <ul class="collection">
                     
                 </ul>
-
             </div>
 
-        <!--  Scripts-->
+            <div id="test-swipe-2" class="col s12 red">
+                <div class="details"></div>                                
+            </div>
+
         <script src="cordova.js"></script>
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="js/materialize.js"></script>

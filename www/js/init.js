@@ -1,4 +1,10 @@
-(function($){
+document.addEventListener('deviceready', onDeviceReady, false);
+
+function onDeviceReady() {
+    // Cordova is now initialized. Have fun!
+
+    console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
+    (function($){
   $(function(){
     $('.sidenav').sidenav();
     $('.tabs').tabs({ "swipeable": true });
@@ -27,27 +33,28 @@ function showResults(result) {
   }
 
   $('.secondary-content').click(function() {
-    varParent = $(this).parent();
-    parentText = varParent.clone().children().remove().end().text();
+    father = $(this).parent();
+    Text = father.clone().children().remove().end().text();
     var tabs = document.getElementById("tabs");
-    var tabsInstance = M.Tabs.getInstance(tabs);
-    tabsInstance.select("test-swipe-2");
+    var instancia = M.Tabs.getInstance(tabs);
+    instancia.select("test-swipe-2");
     $.ajax({
       method: "GET",
-      url: "https://musicbrainz.org/ws/2/artist/"+varParent.attr("artistid"), // Artist ID on custom tag
+      url: "https://musicbrainz.org/ws/2/artist/"+father.attr("artistid"), // Artist ID on custom tag
       dataType: "json",
     }).done(function(msg){
-      showDetails(msg);
+        details(msg);
     }).fail(function(){
-      alert("Ajax Error");
+        alert("Error");
     });
   });
+
+  function details(info) {
+    $('.details').empty();
+    $('<h1>'+info["name"]+'</h3>').appendTo('.details');
+    $('<h2><b>Type:</b> '+info["type"]+'</h2>').appendTo('.details');
+    $('<h2><b>Country:</b> '+info["area"]["sort-name"]+'</h2>').appendTo('.details');
+    $('<h2><b>Life-span:</b> '+info["life-span"]["begin"]+' to '+info["life-span"]["end"]+'</h2>').appendTo('.details');
+  }
 }
-document.addEventListener('deviceready', onDeviceReady, false);
-
-function onDeviceReady() {
-    // Cordova is now initialized. Have fun!
-
-    console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
-
 }
